@@ -1,0 +1,11 @@
+#============= shell ==============
+allow shell device:chr_file { read write };
+allow shell device:chr_file getattr;
+allow shell device:chr_file ioctl;
+allow shell self:capability dac_override;
+allow shell self:capability dac_read_search;
+allow shell system_file:file write;
+allow shell sysfs_lowmemorykiller:file setattr;
+allow shell sysfs_lowmemorykiller:file read;
+allow shell sysfs_lowmemorykiller:file open;
+allow shell self:capability fsetid;

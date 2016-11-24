@@ -1,0 +1,8 @@
+#<src>                                   <mnt_point> <type>    <mnt_flags> <fs_mgr_flags>
+/dev/block/platform/dw_mmc.2/by-num/p1    /boot       ext4      defaults    defaults
+/dev/block/platform/dw_mmc.2/by-num/p2    /system     ext4      defaults    defaults
+/dev/block/platform/dw_mmc.2/by-num/p3    /cache      ext4      defaults    defaults
+/dev/block/platform/dw_mmc.2/by-num/p5    /misc       emmc      defaults    defaults
+/dev/block/platform/dw_mmc.2/by-num/p6    /recovery   emmc      defaults    defaults
+/dev/block/platform/dw_mmc.2/by-num/p7    /data       ext4      defaults    defaults
+/dev/block/platform/dw_mmc.0/by-num/p1    /sdcard     vfat      defaults    defaults

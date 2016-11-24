@@ -1,0 +1,31 @@
+/dev/vr                   0666   system     system
+/dev/mali                 0666   system     system
+/dev/nx_vpu               0666   system     system
+
+# ion
+/dev/ion                  0666   system     system
+
+# UART
+/dev/ttyAMA1		0666	system	system
+/dev/ttyAMA2		0666	system	system
+/dev/ttyAMA3		0666	system	system
+
+# GPS
+/dev/ttyAMA4		0666	system	system
+
+# v4l2
+/dev/media0               0666   system     system
+/dev/v4l-subdev*          0666   system     system
+/dev/video*               0666   system     system
+
+# sw sync
+/dev/sw_sync              0666   system     system
+
+# scaler
+/dev/nxp-scaler           0666   system     system
+
+# hdmi-cec
+/dev/hdmi-cec             0666   system     system
+
+# miracast uibc
+/dev/input/*              0777   system     system

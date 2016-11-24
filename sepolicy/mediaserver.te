@@ -1,0 +1,4 @@
+allow mediaserver system_server:unix_stream_socket { read write setopt };
+allow mediaserver device:chr_file { read write };
+allow mediaserver device:chr_file open;
+allow mediaserver device:chr_file ioctl;

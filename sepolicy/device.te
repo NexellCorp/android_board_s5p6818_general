@@ -1,0 +1,2 @@
+type vr_device, dev_type, mlstrustedobject;
+type user_block_device, dev_type;

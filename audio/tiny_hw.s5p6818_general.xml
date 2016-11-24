@@ -1,0 +1,10 @@
+<mixer>
+  <!-- These are the initial mixer settings -->
+  <!-- change speaker gain 0~35 -->
+  <!--
+  <ctl name="Speaker_Playback_Volume" value="57" />
+  <ctl name="Headphone_Playback_Volume" value="57" />
+  -->
+  <!-- change mic boost gain 0~63 -->
+  <ctl name="Input_PGA_Volume" value="55" />
+</mixer>

@@ -1,0 +1,5 @@
+#============= bootanim ==============
+allow bootanim vr_device:chr_file { read write  };
+allow bootanim vr_device:chr_file open;
+allow bootanim vr_device:chr_file getattr;
+allow bootanim vr_device:chr_file ioctl;

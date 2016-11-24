@@ -1,0 +1,6 @@
+type adjlowmem, domain;
+type adjlowmem_exec, file_type, exec_type;
+
+init_daemon_domain(adjlowmem)
+
+allow adjlowmem adjlowmem_exec:file { open execute_no_trans };

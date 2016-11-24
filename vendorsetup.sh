@@ -1,0 +1,2 @@
+add_lunch_combo aosp_s5p6818_general-userdebug
+add_lunch_combo aosp_s5p6818_general64-userdebug

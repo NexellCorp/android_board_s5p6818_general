@@ -1,0 +1,20 @@
+#============ init ==============
+allow init unlabeled:file execute;
+allow init unlabeled:file execute_no_trans;
+allow init self:binder call;
+allow init self:capability sys_module;
+allow init self:rawip_socket getopt;
+allow init self:binder set_context_mgr;
+allow init self:rawip_socket create;
+allow logd unlabeled:file entrypoint;
+allow logd unlabeled:file read;
+allow logd unlabeled:dir search;
+allow logd unlabeled:file open;
+allow logd unlabeled:file getattr;
+allow logd unlabeled:file execute;
+#allow healthd self:capability2 0x10;
+allow kernel self:capability mknod;
+allow shell unlabeled:file entrypoint;
+allow shell device:chr_file { read write };
+allow shell unlabeled:file read;
+allow shell unlabeled:dir search;

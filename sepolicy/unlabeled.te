@@ -1,0 +1,113 @@
+allow shared_relro unlabeled:file open;
+allow shared_relro unlabeled:file read;
+allow shared_relro unlabeled:file write;
+allow shared_relro unlabeled:file unlink;
+allow shared_relro unlabeled:file link;
+allow shared_relro unlabeled:file getattr;
+allow shared_relro unlabeled:file lock;
+allow shared_relro unlabeled:file execute;
+allow shared_relro unlabeled:file setattr;
+allow shared_relro unlabeled:file append;
+
+allow shared_relro unlabeled:dir open;
+allow shared_relro unlabeled:dir read;
+allow shared_relro unlabeled:dir write;
+allow shared_relro unlabeled:dir unlink;
+allow shared_relro unlabeled:dir link;
+allow shared_relro unlabeled:dir getattr;
+allow shared_relro unlabeled:dir search;
+allow shared_relro unlabeled:dir remove_name;
+allow shared_relro unlabeled:dir setattr;
+
+allow platform_app unlabeled:file open;
+allow platform_app unlabeled:file read;
+allow platform_app unlabeled:file write;
+allow platform_app unlabeled:file unlink;
+allow platform_app unlabeled:file link;
+allow platform_app unlabeled:file getattr;
+allow platform_app unlabeled:file lock;
+allow platform_app unlabeled:file execute;
+allow platform_app unlabeled:file setattr;
+allow platform_app unlabeled:file append;
+
+allow platform_app unlabeled:dir open;
+allow platform_app unlabeled:dir read;
+allow platform_app unlabeled:dir write;
+allow platform_app unlabeled:dir unlink;
+allow platform_app unlabeled:dir link;
+allow platform_app unlabeled:dir getattr;
+allow platform_app unlabeled:dir search;
+allow platform_app unlabeled:dir remove_name;
+allow platform_app unlabeled:dir setattr;
+
+allow untrusted_app unlabeled:file open;
+allow untrusted_app unlabeled:file read;
+allow untrusted_app unlabeled:file write;
+allow untrusted_app unlabeled:file unlink;
+allow untrusted_app unlabeled:file link;
+allow untrusted_app unlabeled:file getattr;
+allow untrusted_app unlabeled:file lock;
+allow untrusted_app unlabeled:file execute;
+allow untrusted_app unlabeled:file setattr;
+allow untrusted_app unlabeled:file append;
+allow untrusted_app unlabeled:file ioctl;
+allow untrusted_app unlabeled:file rename;
+allow untrusted_app unlabeled:file create;
+
+allow untrusted_app unlabeled:dir open;
+allow untrusted_app unlabeled:dir read;
+allow untrusted_app unlabeled:dir write;
+allow untrusted_app unlabeled:dir unlink;
+allow untrusted_app unlabeled:dir link;
+allow untrusted_app unlabeled:dir getattr;
+allow untrusted_app unlabeled:dir search;
+allow untrusted_app unlabeled:dir remove_name;
+allow untrusted_app unlabeled:dir setattr;
+allow untrusted_app unlabeled:dir add_name;
+
+allow radio unlabeled:file open;
+allow radio unlabeled:file read;
+allow radio unlabeled:file write;
+allow radio unlabeled:file unlink;
+allow radio unlabeled:file link;
+allow radio unlabeled:file getattr;
+allow radio unlabeled:file lock;
+allow radio unlabeled:file execute;
+allow radio unlabeled:file setattr;
+allow radio unlabeled:file append;
+
+allow radio unlabeled:dir open;
+allow radio unlabeled:dir read;
+allow radio unlabeled:dir write;
+allow radio unlabeled:dir unlink;
+allow radio unlabeled:dir link;
+allow radio unlabeled:dir getattr;
+allow radio unlabeled:dir search;
+allow radio unlabeled:dir remove_name;
+allow radio unlabeled:dir setattr;
+
+allow sdcardd unlabeled:file open;
+allow sdcardd unlabeled:file read;
+allow sdcardd unlabeled:file write;
+allow sdcardd unlabeled:file unlink;
+allow sdcardd unlabeled:file link;
+allow sdcardd unlabeled:file getattr;
+allow sdcardd unlabeled:file lock;
+#allow sdcardd unlabeled:file execute;
+allow sdcardd unlabeled:file setattr;
+allow sdcardd unlabeled:file append;
+
+allow sdcardd unlabeled:dir open;
+allow sdcardd unlabeled:dir read;
+allow sdcardd unlabeled:dir write;
+allow sdcardd unlabeled:dir unlink;
+allow sdcardd unlabeled:dir link;
+allow sdcardd unlabeled:dir getattr;
+allow sdcardd unlabeled:dir search;
+allow sdcardd unlabeled:dir remove_name;
+allow sdcardd unlabeled:dir setattr;
+
+allow system_app unlabeled:dir search;
+
+allow dhcp unlabeled:file read;
+allow dhcp unlabeled:file unlink;

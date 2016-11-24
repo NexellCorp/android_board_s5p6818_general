@@ -1,0 +1,4 @@
+#============= sdcardd ==============
+allow sdcardd unlabeled:file read;
+allow sdcardd unlabeled:file open;
+allow sdcardd unlabeled:file getattr;

@@ -1,0 +1,240 @@
+import init.s5p6818_general64.usb.rc
+
+on init
+    start watchdogd
+
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+    export SECONDARY_STORAGE /storage/sdcard1
+
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+    # external sdcard
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
+
+    # usb disk1
+    mkdir /mnt/media_rw/usbdisk1 0700 media_rw media_rw
+    mkdir /storage/usbdisk1 0700 root root
+
+    # usb disk2
+    mkdir /mnt/media_rw/usbdisk2 0700 media_rw media_rw
+    mkdir /storage/usbdisk2 0700 root root
+
+    # usb disk3
+    mkdir /mnt/media_rw/usbdisk3 0700 media_rw media_rw
+    mkdir /storage/usbdisk3 0700 root root
+
+    # usb disk4
+    mkdir /mnt/media_rw/usbdisk4 0700 media_rw media_rw
+    mkdir /storage/usbdisk4 0700 root root
+
+    # usb disk5
+    mkdir /mnt/media_rw/usbdisk5 0700 media_rw media_rw
+    mkdir /storage/usbdisk5 0700 root root
+
+    # usb disk6
+    mkdir /mnt/media_rw/usbdisk6 0700 media_rw media_rw
+    mkdir /storage/usbdisk6 0700 root root
+
+    # usb disk7
+    mkdir /mnt/media_rw/usbdisk7 0700 media_rw media_rw
+    mkdir /storage/usbdisk7 0700 root root
+
+    # usb disk8
+    mkdir /mnt/media_rw/usbdisk8 0700 media_rw media_rw
+    mkdir /storage/usbdisk8 0700 root root
+
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+    restorecon_recursive /data/media
+
+    setprop vold.post_fs_data_done 1
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+
+on boot
+    insmod /system/lib/modules/nx_vpu.ko
+
+    # egl debugging
+    setprop debug.egl.callstack 1
+
+    # disable camera zsl 
+    setprop camera.disable_zsl_mode 1
+
+    # disable opengl preloading
+    setprop ro.zygote.disable_gl_preload 1
+
+    # for hwc
+    setprop hwc.scenario 2
+
+    # no tethering
+    setprop ro.tether.denied true
+
+    # no gps
+    setprop ro.gps.enabled false
+
+    # sd wakeup
+    setprop pm.sdwake.enabled true
+
+    # for ota
+    setprop otaupdater.otaid nexell_slsiap_s5p6818_general_kk
+    setprop otaupdater.otaver 10000
+    setprop otaupdater.otatime 20140513-0800
+    setprop otaupdater.sdcard.os cache
+    setprop otaupdater.sdcard.recovery cache
+    # for nexell ota
+    setprop otaupdater.server http://210.219.52.221
+    setprop otaupdater.vendor NEXELL
+
+    # override init.rc to keep plenty of large order chunks around
+    # to improve allocation times
+    # write /proc/sys/vm/min_free_kbytes 32768
+    # write /proc/sys/vm/min_free_order_shift 1
+
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+    setprop ro.radio.noril yes
+
+    # for cts android.os.cts.UsbDebuggingTest testUsbDebugging
+    setprop ro.adb.secure 0
+
+    # Reduce reserved lowmem from ~48MB to ~12MB
+    #write /proc/sys/vm/lowmem_reserve_ratio "128 128"
+
+    # Set up kernel tracing, but disable it by default
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+    write /sys/kernel/debug/tracing/tracing_on 0
+
+    # for deinterlace (0:Disable, 1:BOB(SW), 2:BLEND(SW), 3:LINEAR(SW), 10:3D)
+    # setprop deinterlace.mode 0
+
+# Set vr power policy as Coarse demand
+#    write /sys/devices/platform/vr.0/power_policy coarse_demand
+
+on fs
+    mount_all /fstab.s5p6818_general64
+    setprop ro.crypto.fuse_sdcard true
+    insmod /system/lib/modules/mali.ko
+
+# Permissions for backlight
+    chmod 0660 /sys/class/backlight/pwm-backlight/brightness
+    chown system system /sys/class/backlight/pwm-backlight/brightness
+
+# Permissions for display sync
+    chown system system /sys/devices/platform/display/active.0
+    chown system system /sys/devices/platform/display/active.1
+
+# lowmem setting
+    write /sys/module/lowmemorykiller/parameters/minfree "12288,15360,18432,21504,24576,30720"
+
+# virtual sdcard daemon running as media_rw (1023)
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+    class late_start
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
+
+service fuse_usbdisk1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk1 /storage/usbdisk1
+    class late_start
+    disabled
+
+service fuse_usbdisk2 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk2 /storage/usbdisk2
+    class late_start
+    disabled
+
+service fuse_usbdisk3 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk3 /storage/usbdisk3
+    class late_start
+    disabled
+
+service fuse_usbdisk4 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk4 /storage/usbdisk4
+    class late_start
+    disabled
+
+service fuse_usbdisk5 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk5 /storage/usbdisk5
+    class late_start
+    disabled
+
+service fuse_usbdisk6 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk6 /storage/usbdisk6
+    class late_start
+    disabled
+
+service fuse_usbdisk7 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk7 /storage/usbdisk7
+    class late_start
+    disabled
+
+service fuse_usbdisk8 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk8 /storage/usbdisk8
+    class late_start
+    disabled
+
+service p2p_supplicant /system/bin/wpa_supplicant \
+    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
+    -e/data/misc/wifi/entropy.bin -N \
+    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+    -O/data/misc/wifi/sockets \
+    -g@android:wpa_wlan0
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant \
+    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+    -O/data/misc/wifi/sockets \
+    -e/data/misc/wifi/entropy.bin \
+    -g@android:wpa_wlan0
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+# Realtek Firmware Loader
+service rtw_fwloader /system/bin/rtw_fwloader
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service adjlowmem /adj_lowmem.sh
+    disabled
+    oneshot
