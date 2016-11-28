@@ -41,9 +41,16 @@ BOARD_EGL_CFG := device/nexell/s5p6818_general/egl.cfg
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
+#Touch
+BOARD_USES_TSLIB := true
+
 # audio
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO 	 := false
+
+# Dual Audio
+EN_DUAL_AUDIO := false
+EN_DUAL_AUDIO_PATH_SPDIF := false
 
 BOARD_HAVE_BLUETOOTH := false
 
@@ -51,14 +58,15 @@ BOARD_HAVE_BLUETOOTH := false
 BOARD_HAS_CAMERA := true
 
 # sensor
-BOARD_HAS_SENSOR := true
+BOARD_HAS_SENSOR := false
 BOARD_SENSOR_TYPE := general
 
 EN_FFMPEG_EXTRACTOR := false
 EN_FFMPEG_AUDIO_DEC := false
 
-# Nexell Dual Audio
-EN_DUAL_AUDIO := false
+
+# iOS iAP/Tethering
+BOARD_USES_IOS_IAP_TETHERING := false
 
 # wifi
 # broadcom bcm4329

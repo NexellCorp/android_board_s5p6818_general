@@ -167,17 +167,17 @@ endif
 # ffmpeg libraries
 EN_FFMPEG_EXTRACTOR := false
 EN_FFMPEG_AUDIO_DEC := false
-#ifeq ($(EN_FFMPEG_EXTRACTOR),true)
-#PRODUCT_COPY_FILES += \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavcodec-2.1.4.so:system/lib/libavcodec-2.1.4.so    \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavdevice-2.1.4.so:system/lib/libavdevice-2.1.4.so  \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavfilter-2.1.4.so:system/lib/libavfilter-2.1.4.so  \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavformat-2.1.4.so:system/lib/libavformat-2.1.4.so  \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavresample-2.1.4.so:system/lib/libavresample-2.1.4.so \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavutil-2.1.4.so:system/lib/libavutil-2.1.4.so      \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libswresample-2.1.4.so:system/lib/libswresample-2.1.4.so \
-	#hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libswscale-2.1.4.so:system/lib/libswscale-2.1.4.so
-#endif
+ifeq ($(EN_FFMPEG_EXTRACTOR),true)
+PRODUCT_COPY_FILES += \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavcodec-2.1.4.so:system/lib/libavcodec-2.1.4.so    \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavdevice-2.1.4.so:system/lib/libavdevice-2.1.4.so  \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavfilter-2.1.4.so:system/lib/libavfilter-2.1.4.so  \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavformat-2.1.4.so:system/lib/libavformat-2.1.4.so  \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavresample-2.1.4.so:system/lib/libavresample-2.1.4.so \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavutil-2.1.4.so:system/lib/libavutil-2.1.4.so      \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libswresample-2.1.4.so:system/lib/libswresample-2.1.4.so \
+	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libswscale-2.1.4.so:system/lib/libswscale-2.1.4.so
+endif
 
 # Nexell Dual Audio
 EN_DUAL_AUDIO := false
@@ -304,10 +304,23 @@ PRODUCT_PACKAGES += \
 	aes-perf
 endif
 
+PRODUCT_PACKAGES += \
+    TSCalibration   \
+    libtslib    \
+    inputraw    \
+    pthres      \
+    dejitter    \
+    linear      \
+    tscalib
+
+PRODUCT_COPY_FILES += \
+    external/tslib/ts.conf:system/etc/ts.conf
+
 # Product Property
 # common
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
+	wifi.supplicant_scan_interval=15 \
 	ro.sf.lcd_density=160
 
 # 4330 openl ui property
@@ -375,3 +388,9 @@ $(call inherit-product-if-exists, hardware/samsung_slsi/slsiap/slsiap.mk)
 $(call inherit-product-if-exists, vendor/nexell/apps/nxvideoplayer.mk)
 $(call inherit-product-if-exists, vendor/nexell/apps/nxaudioplayer.mk)
 $(call inherit-product-if-exists, vendor/nexell/apps/smartsync.mk)
+
+# iOS iAP/Tethering
+BOARD_USES_IOS_IAP_TETHERING := true
+ifeq ($(BOARD_USES_IOS_IAP_TETHERING),true)
+$(call inherit-product-if-exists, hardware/samsung_slsi/slsiap/ios_tether/ios_tethering.mk)
+endif

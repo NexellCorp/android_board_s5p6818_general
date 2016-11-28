@@ -7,9 +7,15 @@
 #include <nxp-v4l2.h>
 #include <nx_camera_board.h>
 
-#include <SP2518.h>
+#define DECODER_TW9900      0
+#define AHD_NVP6114A        1
+#define SERDES_DS90UB914Q   2
 
-#include <SP0838.h>
+//#include <TW9900.h>
+#include <NVP6114A.h>
+//#include <DS90UB914Q.h>
+
+#include <TW9992.h>
 
 namespace android {
 
@@ -27,7 +33,7 @@ NXCameraBoardSensor *get_board_camera_sensor(int id) {
 
     if (id == 0) {
         if (!backSensor) {
-            backSensor = new SP2518(nxp_v4l2_sensor0);
+            backSensor = new NVP6114A(nxp_v4l2_sensor0);
             if (!backSensor)
                 ALOGE("%s: cannot create BACK Sensor", __func__);
         }
@@ -36,7 +42,7 @@ NXCameraBoardSensor *get_board_camera_sensor(int id) {
 
     else if (id == 1) {
         if (!frontSensor) {
-            frontSensor = new SP0838(nxp_v4l2_sensor1);
+            frontSensor = new TW9992(nxp_v4l2_sensor1);
             if (!frontSensor)
                 ALOGE("%s: cannot create FRONT Sensor", __func__);
         }
