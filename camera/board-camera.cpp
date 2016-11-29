@@ -113,7 +113,7 @@ bool get_board_camera_is_mipi(uint32_t v4l2_sensorId)
     case nxp_v4l2_sensor0:
         return false;
     case nxp_v4l2_sensor1:
-        return false;
+        return true;
     default:
         return false;
     }
