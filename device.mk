@@ -260,6 +260,10 @@ PRODUCT_COPY_FILES += \
 	linux/platform/s5p6818/library/lib/libnxvidrc_android.so:system/lib/libnxvidrc_android.so
 endif
 
+PRODUCT_COPY_FILES += \
+	device/nexell/s5p6818_general/busybox:system/bin/busybox \
+	device/nexell/s5p6818_general/memtester1-1:system/bin/memtester1-1 \
+	device/nexell/s5p6818_general/hwreg_cmd:system/bin/hwreg_cmd
 
 PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi xxhdpi
 #PRODUCT_AAPT_PREF_CONFIG := hdpi

@@ -30,4 +30,44 @@
         android:storageDescription="@string/storage_sd_card"
         android:removable="true"
         android:maxFileSize="4096" />
+    <!-- usb disk1 -->
+    <storage android:mountPoint="/storage/usbdisk1"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk2 -->
+    <storage android:mountPoint="/storage/usbdisk2"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk3 -->
+    <storage android:mountPoint="/storage/usbdisk3"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk4 -->
+    <storage android:mountPoint="/storage/usbdisk4"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk5 -->
+    <storage android:mountPoint="/storage/usbdisk5"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk6 -->
+    <storage android:mountPoint="/storage/usbdisk6"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk7 -->
+    <storage android:mountPoint="/storage/usbdisk7"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
+    <!-- usb disk8 -->
+    <storage android:mountPoint="/storage/usbdisk8"
+        android:storageDescription="@string/storage_usb"
+        android:removable="true"
+        android:maxFileSize="4096" />
 </StorageList>
