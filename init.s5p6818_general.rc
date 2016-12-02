@@ -122,9 +122,6 @@ on boot
 # Set vr power policy as Coarse demand
 #    write /sys/devices/platform/vr.0/power_policy coarse_demand
 
-    # Set default media player to awesome player
-    setprop media.stagefright.use-awesome 1
-
 on fs
     mount_all /fstab.s5p6818_general
     setprop ro.crypto.fuse_sdcard true
