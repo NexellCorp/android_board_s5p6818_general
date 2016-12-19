@@ -70,7 +70,7 @@ PRODUCT_COPY_FILES += \
 	device/nexell/s5p6818_general/bootanimation.zip:system/media/bootanimation.zip
 
 ################################################################################
-# recovery 
+# recovery
 ################################################################################
 PRODUCT_COPY_FILES += \
 	device/nexell/s5p6818_general/busybox:busybox
@@ -165,8 +165,8 @@ PRODUCT_COPY_FILES += \
 endif
 
 # ffmpeg libraries
-EN_FFMPEG_EXTRACTOR := false
-EN_FFMPEG_AUDIO_DEC := false
+EN_FFMPEG_EXTRACTOR := true
+EN_FFMPEG_AUDIO_DEC := true
 ifeq ($(EN_FFMPEG_EXTRACTOR),true)
 PRODUCT_COPY_FILES += \
 	hardware/samsung_slsi/slsiap/omx/codec/ffmpeg/libs/libavcodec-2.1.4.so:system/lib/libavcodec-2.1.4.so    \
