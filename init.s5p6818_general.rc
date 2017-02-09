@@ -128,6 +128,11 @@ on fs
     insmod /system/lib/modules/vr.ko
     insmod /system/lib/modules/mali.ko
 
+# GL library link
+    symlink /system/lib/egl/libEGL_vr.so /system/lib/libEGL_vr.so
+    symlink /system/lib/egl/libGLESv1_CM_vr.so /system/lib/libGLESv1_CM_vr.so
+    symlink /system/lib/egl/libGLESv2_vr.so /system/lib/libGLESv2_vr.so
+
 # Permissions for backlight
     chmod 0660 /sys/class/backlight/pwm-backlight/brightness
     chown system system /sys/class/backlight/pwm-backlight/brightness
